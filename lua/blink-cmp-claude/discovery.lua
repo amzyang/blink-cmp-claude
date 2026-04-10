@@ -68,16 +68,20 @@ local function discover_skills(config)
   end
 
   local skills = {}
-  local dir = vim.fn.expand('~/.claude/skills')
-  if vim.fn.isdirectory(dir) == 0 then
-    return skills
-  end
+  local dirs = {
+    vim.fn.expand('~/.claude/skills'),
+    vim.fn.getcwd() .. '/.claude/skills',
+  }
 
-  local files = vim.fn.glob(dir .. '/*/SKILL.md', false, true)
-  for _, file in ipairs(files) do
-    local name = vim.fn.fnamemodify(vim.fn.fnamemodify(file, ':h'), ':t')
-    local fm = parse_frontmatter(file)
-    table.insert(skills, { name = name, desc = fm.desc, hint = fm.hint, skill = true })
+  for _, dir in ipairs(dirs) do
+    if vim.fn.isdirectory(dir) == 1 then
+      local files = vim.fn.glob(dir .. '/*/SKILL.md', false, true)
+      for _, file in ipairs(files) do
+        local name = vim.fn.fnamemodify(vim.fn.fnamemodify(file, ':h'), ':t')
+        local fm = parse_frontmatter(file)
+        table.insert(skills, { name = name, desc = fm.desc, hint = fm.hint, skill = true })
+      end
+    end
   end
 
   return skills
