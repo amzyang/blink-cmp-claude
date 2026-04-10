@@ -3,6 +3,7 @@
 [blink.cmp](https://github.com/saghen/blink.cmp) completion source for [Claude Code](https://claude.ai/code) prompts.
 
 Provides completions for:
+
 - `/` slash commands (built-in + custom)
 - `@` file mentions
 
@@ -72,7 +73,13 @@ require('blink-cmp-claude').setup({
   -- source options
   sources = {
     slash = { enabled = true, score_offset = 100 },
-    files = { enabled = true, score_offset = 90 },
+    files = {
+      enabled = true,
+      score_offset = 90,
+      max_results = 20,          -- max completion items
+      search_hidden = false,     -- include hidden files
+      search_gitignore = true,   -- respect .gitignore
+    },
   },
 })
 ```
@@ -82,8 +89,13 @@ require('blink-cmp-claude').setup({
 - `:ClaudePromptMode` - Enable claude completions for current buffer
 - `:ClaudeRefreshCommands` - Refresh command list after adding custom commands
 
+## Requirements
+
+- [`fd`](https://github.com/sharkdp/fd) (recommended) or [`rg`](https://github.com/BurntSushi/ripgrep) for fuzzy file matching. Falls back to glob if neither is installed.
+
 ## Features
 
+- Fuzzy `@` file matching (e.g., `@java` matches `somedir/path/SomeJava.lua`)
 - 45 built-in Claude Code slash commands
 - Auto-discovers custom commands from `~/.claude/commands/`
 - Auto-discovers skills from `CLAUDE.md`

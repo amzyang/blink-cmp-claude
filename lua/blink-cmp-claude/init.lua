@@ -15,7 +15,13 @@ local defaults = {
   },
   sources = {
     slash = { enabled = true, score_offset = 100 },
-    files = { enabled = true, score_offset = 90 },
+    files = {
+      enabled = true,
+      score_offset = 90,
+      max_results = 20,
+      search_hidden = false,
+      search_gitignore = true,
+    },
   },
 }
 
