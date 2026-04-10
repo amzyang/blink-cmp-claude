@@ -44,4 +44,11 @@ return {
   { name = 'todos', desc = 'List TODOs' },
   { name = 'usage', desc = 'Show usage limits' },
   { name = 'vim', desc = 'Enter vim mode' },
+  -- built-in skills (not discoverable from disk)
+  { name = 'update-config', desc = 'Configure Claude Code settings', skill = true },
+  { name = 'keybindings-help', desc = 'Customize keyboard shortcuts', skill = true },
+  { name = 'simplify', desc = 'Review code for quality and simplify', skill = true },
+  { name = 'loop', desc = 'Run a command on a recurring interval', hint = '[interval] [command]', skill = true },
+  { name = 'schedule', desc = 'Manage scheduled remote agents', skill = true },
+  { name = 'claude-api', desc = 'Build Claude API / Anthropic SDK apps', skill = true },
 }

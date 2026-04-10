@@ -11,7 +11,7 @@ local defaults = {
   discover = {
     custom_commands = true,
     skills = true,
-    mcp = true,
+    plugins = true,
   },
   sources = {
     slash = { enabled = true, score_offset = 100 },
